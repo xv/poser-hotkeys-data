@@ -26,15 +26,15 @@ static const char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
 #define puts(str) fputs((str), stdout)
 
 #define printf_error(fmt, ...) {\
-    console_set_colors(ti, COLOR_RED, COLOR_NONE);\
+    console_set_colors(cw, COLOR_RED, COLOR_NONE);\
     fprintf(stderr, fmt, ##__VA_ARGS__);\
-    console_reset_colors(ti);\
+    console_reset_colors(cw);\
 };
 
 #define printf_warning(fmt, ...) {\
-    console_set_colors(ti, COLOR_YELLOW, COLOR_NONE);\
+    console_set_colors(cw, COLOR_YELLOW, COLOR_NONE);\
     printf(fmt, ##__VA_ARGS__);\
-    console_reset_colors(ti);\
+    console_reset_colors(cw);\
 };
 
 #define parse_int_arg(arg, in) {\
@@ -47,7 +47,7 @@ static const char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
     }\
 };
 
-ConsoleWindow* ti;
+ConsoleWindow* cw;
 
 struct Config {
     char* packName, * packSize;
@@ -177,7 +177,7 @@ void generate_pack(struct Config config) {
  * @param argv Pointer to the first element of an array of argc + 1.
  */
 int main(int argc, char* argv[]) {
-    ti = console_init();
+    cw = console_init();
 
     if (argc < 2) {
         printf_error("No argument is supplied\nExecute <phpg ?> to print usage info\n");
@@ -194,7 +194,7 @@ int main(int argc, char* argv[]) {
     }
 
     generate_pack(config);
-    free(ti);
+    free(cw);
 
     return EXIT_SUCCESS;
 }

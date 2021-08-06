@@ -9,32 +9,29 @@
 #include <stdlib.h>
 #include "console.h"
 
-ConsoleWindow* console_init()
-{
-    ConsoleWindow* ti = (ConsoleWindow*)calloc(1, sizeof(ConsoleWindow));
+ConsoleWindow* console_init() {
+    ConsoleWindow* cw = (ConsoleWindow*)calloc(1, sizeof(ConsoleWindow));
 
 #ifdef _WIN32
-    if (ti)
-    {
-        ti->std_handle = GetStdHandle(STD_OUTPUT_HANDLE);
-        if (ti->std_handle != NULL)
-        {
-            if (!GetConsoleScreenBufferInfo(ti->std_handle, &ti->console_info))
-                ti->std_handle = NULL;
+    if (cw) {
+        cw->std_handle = GetStdHandle(STD_OUTPUT_HANDLE);
+        if (cw->std_handle != NULL) {
+            if (!GetConsoleScreenBufferInfo(cw->std_handle, &cw->console_info))
+                cw->std_handle = NULL;
         }
     }
 #endif
 
-    return ti;
+    return cw;
 }
 
-void console_set_colors(ConsoleWindow* ti, ConsoleColor fg, ConsoleColor bg) {
+void console_set_colors(ConsoleWindow* cw, ConsoleColor fg, ConsoleColor bg) {
     if (bg == COLOR_NONE && fg == COLOR_NONE)
         return;
 
 #ifdef _WIN32
     CONSOLE_SCREEN_BUFFER_INFO info;
-    if (!GetConsoleScreenBufferInfo(ti->std_handle, &info))
+    if (!GetConsoleScreenBufferInfo(cw->std_handle, &info))
         return;
 
     WORD color = info.wAttributes;
@@ -44,17 +41,17 @@ void console_set_colors(ConsoleWindow* ti, ConsoleColor fg, ConsoleColor bg) {
     if (bg != COLOR_NONE)
         color = (color & 0xFF0F) | (bg << 4);
 
-    if (ti->std_handle != NULL)
-        SetConsoleTextAttribute(ti->std_handle, color);
+    if (cw->std_handle != NULL)
+        SetConsoleTextAttribute(cw->std_handle, color);
 #endif
 }
 
-void console_reset_colors(ConsoleWindow* ti) {
+void console_reset_colors(ConsoleWindow* cw) {
 #ifdef _WIN32
-    if (ti == NULL)
+    if (cw == NULL)
         return;
 
-    if (ti->std_handle != NULL)
-        SetConsoleTextAttribute(ti->std_handle, ti->console_info.wAttributes);
+    if (cw->std_handle != NULL)
+        SetConsoleTextAttribute(cw->std_handle, cw->console_info.wAttributes);
 #endif
 }
