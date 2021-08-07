@@ -201,7 +201,7 @@ int main(int argc, char* argv[]) {
     cw = console_init();
 
     if (argc < 2) {
-        printf_error("No argument is supplied\nExecute <phpg ?> to print usage info\n");
+        printf_error("No argument is supplied\nExecute <pg ?> to print usage info\n");
         exit(EXIT_FAILURE);
     }
 
