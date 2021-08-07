@@ -116,40 +116,46 @@ void string_lowercase(char* str)
  *               is processed and generated.
  */
 void generate_pack(struct Config config) {
-    char rangeDelim[] = ":";
-    int data[2] = { 0 };
+    int sizeRange[2] = { 0 };
 
-    if (strchr(config.packSize, rangeDelim[0]) != NULL) {
-        int tc = 0;
-        for (char* p = strtok(config.packSize, rangeDelim); p != NULL; p = strtok(NULL, rangeDelim)) {
-            if (tc == 2)
-                break;
-  
-            data[tc++] = parse_int(p, -1);
-        }
-
-        if (data[0] < 0 || data[1] < 0) {
-            printf_error("Invalid pack size range: input contains unparseable data\n");
-            return;
-        } else if (data[0] == 0 && data[1] == 0) {
-            printf_error("Invalid pack size range: start and end values cannot be both zeroes\n");
-            return;
-        } else if (data[0] >= 0 && data[1] < data[0]) {
-            printf_error (
-                "Invalid pack size range: end value '%i' is less than the start value of '%i'\n", 
-                data[1], data[0]
-            );
-            return;
-        }
+    if (config.packSize == NULL) {
+        sizeRange[0] = 1;
+        sizeRange[1] = 1;
+        printf_warning("Pack size [-ps] value was auto defaulted to 1\n");
     } else {
-        int end = parse_int(config.packSize, -1);
-        if (end < 1) {
-            printf_error("Invalid pack size: value cannot be less than 1\n");
-            return;
-        }
+        char rangeDelim[] = ":";
+        if (strchr(config.packSize, rangeDelim[0]) != NULL) {
+            int tc = 0;
+            for (char* p = strtok(config.packSize, rangeDelim); p != NULL; p = strtok(NULL, rangeDelim)) {
+                if (tc == 2)
+                    break;
+  
+                sizeRange[tc++] = parse_int(p, -1);
+            }
 
-        data[0] = 1;
-        data[1] = end;
+            if (sizeRange[0] < 0 || sizeRange[1] < 0) {
+                printf_error("Invalid pack size range: input contains unparseable data\n");
+                return;
+            } else if (sizeRange[0] == 0 && sizeRange[1] == 0) {
+                printf_error("Invalid pack size range: start and end values cannot be both zeroes\n");
+                return;
+            } else if (sizeRange[0] >= 0 && sizeRange[1] < sizeRange[0]) {
+                printf_error (
+                    "Invalid pack size range: end value '%i' is less than the start value of '%i'\n", 
+                    sizeRange[1], sizeRange[0]
+                );
+                return;
+            }
+        } else {
+            int end = parse_int(config.packSize, -1);
+            if (end < 1) {
+                printf_error("Invalid pack size: value is less than 1 or contains unparseable data\n");
+                return;
+            }
+
+            sizeRange[0] = 1;
+            sizeRange[1] = end;
+        }
     }
 
     char* dup = string_duplicate(config.packName);
@@ -157,10 +163,10 @@ void generate_pack(struct Config config) {
     printf("\"%s\" : [ ", dup);
     free(dup);
 
-    for (int i = data[0]; i <= data[1]; i++) {
+    for (int i = sizeRange[0]; i <= sizeRange[1]; i++) {
         if (config.packPairs < 2) {
             printf("\"%s%i\"", config.packName, i);
-            puts(i != data[1] ? ", " : " ]");
+            puts(i != sizeRange[1] ? ", " : " ]");
             continue;
         }
 
