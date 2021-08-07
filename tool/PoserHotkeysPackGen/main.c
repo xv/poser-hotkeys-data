@@ -50,7 +50,7 @@ static const char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
 ConsoleWindow* cw;
 
 struct Config {
-    char* packName, * packSize;
+    char* packName, *animName, *packSize;
     int packPairs;
 };
 
@@ -121,7 +121,7 @@ void generate_pack(struct Config config) {
     if (config.packSize == NULL) {
         sizeRange[0] = 1;
         sizeRange[1] = 1;
-        printf_warning("Pack size [-ps] value was auto defaulted to 1\n");
+        printf_warning("Pack Size [-ps] value was auto defaulted to 1\n");
     } else {
         char rangeDelim[] = ":";
         if (strchr(config.packSize, rangeDelim[0]) != NULL) {
@@ -158,6 +158,14 @@ void generate_pack(struct Config config) {
         }
     }
 
+    if (config.packName == NULL)
+        config.packName = config.animName;
+
+    if (config.packPairs > 26) {
+        printf_warning("Pack Pairs [-pp] value is greater than 26 and was ignored\n");
+        config.packPairs = 0;
+    }
+
     char* dup = string_duplicate(config.packName);
     string_lowercase(dup);
     printf("\"%s\" : [ ", dup);
@@ -165,13 +173,13 @@ void generate_pack(struct Config config) {
 
     for (int i = sizeRange[0]; i <= sizeRange[1]; i++) {
         if (config.packPairs < 2) {
-            printf("\"%s%i\"", config.packName, i);
+            printf("\"%s%i\"", config.animName, i);
             puts(i != sizeRange[1] ? ", " : " ]");
             continue;
         }
 
         for (int j = 0; j < config.packPairs; j++)
-            printf("\"%s%i%c\", ", config.packName, i, alphabet[j]);
+            printf("\"%s%i%c\", ", config.animName, i, alphabet[j]);
     }
     puts("\b\b ]\n");
 }
@@ -197,6 +205,7 @@ int main(int argc, char* argv[]) {
         int val = i + 1;
         if      (has_arg("-pn")) { config.packName = argv[val]; }
         else if (has_arg("-ps")) { config.packSize = argv[val]; }
+        else if (has_arg("-an")) { config.animName = argv[val]; }
         else if (has_arg("-pp")) { parse_int_arg(val, config.packPairs); }
     }
 
