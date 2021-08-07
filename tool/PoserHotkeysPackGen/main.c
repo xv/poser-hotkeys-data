@@ -117,11 +117,11 @@ void string_lowercase(char* str)
  */
 void generate_pack(struct Config config) {
     if (config.animName == NULL) {
-        printf_error("Animation Name [-an] value is not set\n");
+        printf_error("Animation Name [-an] is not set\n");
         return;
     } else if (config.packName == NULL) {
         config.packName = config.animName;
-        printf_warning("Pack Name [-pn] value was auto defaulted to the value of Animation Name [-an]\n")
+        printf_warning("Pack Name [-pn] was auto defaulted to the value of Animation Name [-an]\n")
     }
 
     int sizeRange[2] = { 0 };
@@ -129,7 +129,7 @@ void generate_pack(struct Config config) {
     if (config.packSize == NULL) {
         sizeRange[0] = 1;
         sizeRange[1] = 1;
-        printf_warning("Pack Size [-ps] value was auto defaulted to 1\n");
+        printf_warning("Pack Size [-ps] was auto defaulted to 1\n");
     } else {
         char rangeDelim[] = ":";
         if (strchr(config.packSize, rangeDelim[0]) != NULL) {
@@ -167,7 +167,7 @@ void generate_pack(struct Config config) {
     }
 
     if (config.packPairs > 26) {
-        printf_warning("Pack Pairs [-pp] value is greater than 26 and was ignored\n");
+        printf_warning("Pack Pairs [-pp] is greater than 26 and was ignored\n");
         config.packPairs = 0;
     }
 
