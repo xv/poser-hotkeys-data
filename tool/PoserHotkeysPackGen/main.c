@@ -190,7 +190,8 @@ int main(int argc, char* argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    struct Config config = { 0, 0, 0 };
+    struct Config config;
+    memset(&config, 0, sizeof config);
 
     for (int i = 1; i < argc; ++i) {
         int val = i + 1;
