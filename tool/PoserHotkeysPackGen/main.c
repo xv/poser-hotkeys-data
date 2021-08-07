@@ -119,6 +119,9 @@ void generate_pack(struct Config config) {
     if (config.animName == NULL) {
         printf_error("Animation Name [-an] value is not set\n");
         return;
+    } else if (config.packName == NULL) {
+        config.packName = config.animName;
+        printf_warning("Pack Name [-pn] value was auto defaulted to the value of Animation Name [-an]\n")
     }
 
     int sizeRange[2] = { 0 };
@@ -162,9 +165,6 @@ void generate_pack(struct Config config) {
             sizeRange[1] = end;
         }
     }
-
-    if (config.packName == NULL)
-        config.packName = config.animName;
 
     if (config.packPairs > 26) {
         printf_warning("Pack Pairs [-pp] value is greater than 26 and was ignored\n");
