@@ -116,6 +116,11 @@ void string_lowercase(char* str)
  *               is processed and generated.
  */
 void generate_pack(struct Config config) {
+    if (config.animName == NULL) {
+        printf_error("Animation Name [-an] value is not set\n");
+        return;
+    }
+
     int sizeRange[2] = { 0 };
 
     if (config.packSize == NULL) {
