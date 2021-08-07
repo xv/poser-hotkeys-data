@@ -19,6 +19,8 @@
 
 static const char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
 
+#define ALPHABET_LETTERS 26
+
 #define digit(ch) (ch > 0x2f && ch < 0x3a)
 
 #define has_arg(arg) argv[i] && strcmp(argv[i], arg) == 0
@@ -166,7 +168,7 @@ void generate_pack(struct Config config) {
         }
     }
 
-    if (config.packPairs > 26) {
+    if (config.packPairs > ALPHABET_LETTERS) {
         printf_warning("Pack Pairs [-pp] is greater than 26 and was ignored\n");
         config.packPairs = 0;
     }
