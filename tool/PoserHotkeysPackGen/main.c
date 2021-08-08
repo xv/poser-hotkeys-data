@@ -56,6 +56,25 @@ struct Config {
     int packPairs;
 };
 
+static void print_usage_info()
+{
+    puts("Usage:\n  pg [-an <AnimationName>] [options]\n");
+    puts("  The order of specifying the input does not matter.\n\n");
+    puts("Options:\n");
+    puts("  -pn [pack name.] Sets the pack name. This is what you see in Poser Hotkey's\n\
+      <string>     MCM when you try to select a pose pack from a specific\n\
+                   posing mod. If this argument is not specified, then\n\
+                   <AnimationName> will be used.\n\n");
+    puts("  -ps [pack size.] Sets the number of items (aka animations) in the pack. The\n\
+      <int>        incrementation begins from 1 by default. You can specify a\n\
+                   number range by using A:Z, where A and Z represent starting\n\
+                   and ending values.\n\n");
+    puts("  -pp [pack pairs] Creates pairs for each item (aka animation) in the pack by\n\
+      <int>        appending a lowercase alphabet letter to the end of each\n\
+                   item. For example, specifying a pair of two for a pack\n\
+                   size of two will create [anim1a, anim1b, anim2a, anim2b].");
+}
+
 /**
  * @brief Parses a given string as an integer.
  * 
@@ -214,6 +233,14 @@ int main(int argc, char* argv[]) {
         else if (has_arg("-ps")) { config.packSize = argv[val]; }
         else if (has_arg("-an")) { config.animName = argv[val]; }
         else if (has_arg("-pp")) { parse_int_arg(val, config.packPairs); }
+        else if (has_arg("?")) {
+            // Ignore the argument if it is not the only one
+            if (argc > 2)
+                continue;
+
+            print_usage_info();
+            exit(EXIT_SUCCESS);
+        }
     }
 
     generate_pack(config);
