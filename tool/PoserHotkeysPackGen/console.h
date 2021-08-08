@@ -43,7 +43,7 @@ typedef enum {
     COLOR_BLUE = 0x4,
     COLOR_MAGENTA = 0x5,
     COLOR_CYAN = 0x6,
-    COLOR_WHITE = 0x7,
+    COLOR_WHITE = 0x7
 #endif
 } ConsoleColor;
 
