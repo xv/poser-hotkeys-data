@@ -53,7 +53,7 @@ ConsoleWindow* cw;
 
 struct Config {
     char* packName, *animName, *packSize;
-    int packPairs, uppercasePackPairs;
+    int packPairs;
 };
 
 static void print_usage_info()
@@ -199,11 +199,6 @@ void generate_pack(struct Config config) {
     printf("\"%s\" : [ ", dup);
     free(dup);
 
-    if (config.uppercasePackPairs) {
-        for (int i = 0; i < ALPHABET_LETTERS; i++)
-            alphabet[i] ^= 32;
-    }
-
     for (int i = sizeRange[0]; i <= sizeRange[1]; i++) {
         if (config.packPairs < 2) {
             printf("\"%s%i\"", config.animName, i);
@@ -241,8 +236,9 @@ int main(int argc, char* argv[]) {
         else if (has_arg("-an")) { config.animName = argv[val]; }
         else if (has_arg("-pp")) { parse_int_arg(val, config.packPairs); }
         else if (has_arg("-PP")) { 
-            config.uppercasePackPairs = 1;
             parse_int_arg(val, config.packPairs);
+            for (int i = 0; i < ALPHABET_LETTERS; i++)
+                alphabet[i] ^= 32;
         } else if (has_arg("?")) {
             // Ignore the argument if it is not the only one
             if (argc > 2)
