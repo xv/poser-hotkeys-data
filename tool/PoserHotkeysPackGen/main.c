@@ -17,7 +17,7 @@
     #include <unistd.h>
 #endif
 
-static const char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
+static char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
 
 #define ALPHABET_LETTERS 26
 
@@ -53,7 +53,7 @@ ConsoleWindow* cw;
 
 struct Config {
     char* packName, *animName, *packSize;
-    int packPairs;
+    int packPairs, uppercasePackPairs;
 };
 
 static void print_usage_info()
@@ -72,7 +72,9 @@ static void print_usage_info()
     puts("  -pp [pack pairs] Creates pairs for each item (aka animation) in the pack by\n\
       <int>        appending a lowercase alphabet letter to the end of each\n\
                    item. For example, specifying a pair of two for a pack\n\
-                   size of two will create [anim1a, anim1b, anim2a, anim2b].\n");
+                   size of two will create [anim1a, anim1b, anim2a, anim2b].\n\n");
+    
+    puts("  -PP [pack pairs] Same as [-pp] but appends an UPPERCASE alphabet letter.\n");
 }
 
 /**
@@ -191,11 +193,16 @@ void generate_pack(struct Config config) {
         printf_warning("Pack Pairs [-pp] is greater than 26 and was ignored\n");
         config.packPairs = 0;
     }
-
+        
     char* dup = string_duplicate(config.packName);
     string_lowercase(dup);
     printf("\"%s\" : [ ", dup);
     free(dup);
+
+    if (config.uppercasePackPairs) {
+        for (int i = 0; i < ALPHABET_LETTERS; i++)
+            alphabet[i] ^= 32;
+    }
 
     for (int i = sizeRange[0]; i <= sizeRange[1]; i++) {
         if (config.packPairs < 2) {
@@ -233,7 +240,10 @@ int main(int argc, char* argv[]) {
         else if (has_arg("-ps")) { config.packSize = argv[val]; }
         else if (has_arg("-an")) { config.animName = argv[val]; }
         else if (has_arg("-pp")) { parse_int_arg(val, config.packPairs); }
-        else if (has_arg("?")) {
+        else if (has_arg("-PP")) { 
+            config.uppercasePackPairs = 1;
+            parse_int_arg(val, config.packPairs);
+        } else if (has_arg("?")) {
             // Ignore the argument if it is not the only one
             if (argc > 2)
                 continue;
