@@ -53,7 +53,7 @@ ConsoleWindow* cw;
 
 struct Config {
     char* packName, *animName, *packSize;
-    int packPairs;
+    int packPairs, zeroPad;
 };
 
 static void print_usage_info()
@@ -73,8 +73,10 @@ static void print_usage_info()
       <int>        appending a lowercase alphabet letter to the end of each\n\
                    item. For example, specifying a pair of two for a pack\n\
                    size of two will create [anim1a, anim1b, anim2a, anim2b].\n\n");
-    
-    puts("  -PP [pack pairs] Same as [-pp] but appends an UPPERCASE alphabet letter.\n");
+    puts("  -PP [pack pairs] Performs the same function as [-pp] except that it appends\n\
+      <int>        an UPPERCASE alphabet letter instead of lowercase.\n\n");
+    puts("  -zp [zero pad..] Pads the incremental integer part of <AnimationName> with\n\
+      <int>        leading zeroes.\n");
 }
 
 /**
@@ -201,12 +203,12 @@ void generate_pack(struct Config config) {
 
     for (int i = sizeRange[0]; i <= sizeRange[1]; i++) {
         if (config.packPairs < 2) {
-            printf("\"%s%i\", ", config.animName, i);
+            printf("\"%s%0*i\", ", config.animName, config.zeroPad + 1, i);
             continue;
         }
 
         for (int j = 0; j < config.packPairs; j++)
-            printf("\"%s%i%c\", ", config.animName, i, alphabet[j]);
+            printf("\"%s%0*i%c\", ", config.animName, config.zeroPad + 1, i, alphabet[j]);
     }
     puts("\b\b ]\n");
 }
@@ -242,6 +244,8 @@ int main(int argc, char* argv[]) {
             parse_int_arg(val, config.packPairs);
             for (int i = 0; i < ALPHABET_LETTERS; i++)
                 alphabet[i] ^= 32;
+        } else if (has_arg("-zp")) {
+            parse_int_arg(val, config.zeroPad);
         } else if (has_arg("?")) {
             // Ignore the argument if it is not the only one
             if (argc > 2)
