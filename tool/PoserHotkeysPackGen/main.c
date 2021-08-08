@@ -59,7 +59,7 @@ struct Config {
 static void print_usage_info()
 {
     puts("Usage:\n  pg [-an <AnimationName>] [options]\n");
-    puts("  The order of specifying the input does not matter.\n\n");
+    puts("  The order of specifying arguments does not matter.\n\n");
     puts("Options:\n");
     puts("  -pn [pack name.] Sets the pack name. This is what you see in Poser Hotkeys'\n\
       <string>     MCM when you try to select a pose pack from a specific\n\
@@ -201,8 +201,7 @@ void generate_pack(struct Config config) {
 
     for (int i = sizeRange[0]; i <= sizeRange[1]; i++) {
         if (config.packPairs < 2) {
-            printf("\"%s%i\"", config.animName, i);
-            puts(i != sizeRange[1] ? ", " : " ]");
+            printf("\"%s%i\", ", config.animName, i);
             continue;
         }
 
