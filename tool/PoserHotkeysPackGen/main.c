@@ -231,11 +231,15 @@ int main(int argc, char* argv[]) {
 
     for (int i = 1; i < argc; ++i) {
         int val = i + 1;
-        if      (has_arg("-pn")) { config.packName = argv[val]; }
-        else if (has_arg("-ps")) { config.packSize = argv[val]; }
-        else if (has_arg("-an")) { config.animName = argv[val]; }
-        else if (has_arg("-pp")) { parse_int_arg(val, config.packPairs); }
-        else if (has_arg("-PP")) { 
+        if (has_arg("-pn")) {
+            config.packName = argv[val];
+        } else if (has_arg("-ps")) { 
+            config.packSize = argv[val];
+        } else if (has_arg("-an")) {
+            config.animName = argv[val];
+        } else if (has_arg("-pp")) {
+            parse_int_arg(val, config.packPairs);
+        } else if (has_arg("-PP")) { 
             parse_int_arg(val, config.packPairs);
             for (int i = 0; i < ALPHABET_LETTERS; i++)
                 alphabet[i] ^= 32;
