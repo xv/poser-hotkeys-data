@@ -61,7 +61,7 @@ static void print_usage_info()
     puts("Usage:\n  pg [-an <AnimationName>] [options]\n");
     puts("  The order of specifying the input does not matter.\n\n");
     puts("Options:\n");
-    puts("  -pn [pack name.] Sets the pack name. This is what you see in Poser Hotkey's\n\
+    puts("  -pn [pack name.] Sets the pack name. This is what you see in Poser Hotkeys'\n\
       <string>     MCM when you try to select a pose pack from a specific\n\
                    posing mod. If this argument is not specified, then\n\
                    <AnimationName> will be used.\n\n");
