@@ -72,7 +72,7 @@ static void print_usage_info()
     puts("  -pp [pack pairs] Creates pairs for each item (aka animation) in the pack by\n\
       <int>        appending a lowercase alphabet letter to the end of each\n\
                    item. For example, specifying a pair of two for a pack\n\
-                   size of two will create [anim1a, anim1b, anim2a, anim2b].");
+                   size of two will create [anim1a, anim1b, anim2a, anim2b].\n");
 }
 
 /**
