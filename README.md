@@ -13,6 +13,7 @@ Links to the posing mods in the table below can be found on the first line of ea
 | Halo Poser SE             | HalosPoser.json<br>PinupPoser.json |
 | Ilv Poser SE              |                      ILVPoser.json |
 | Kinoko Pose SE            |                    KinokoPose.json |
+| Knox Poser SE             |                     KnoxPoser.json |
 | MK Poser SE               |                       MKPoser.json |
 | Shocky's Poses Pack SE    |                  ShockysPoses.json |
 
