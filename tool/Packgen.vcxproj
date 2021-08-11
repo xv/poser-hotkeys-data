@@ -22,9 +22,9 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{7debf5ae-c3bd-4408-b2d4-82f734911ebd}</ProjectGuid>
-    <RootNamespace>PoserHotkeysPackGen</RootNamespace>
+    <RootNamespace>Packgen</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>PoserHotkeysPackGen</ProjectName>
+    <ProjectName>Packgen</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
