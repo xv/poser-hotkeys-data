@@ -146,7 +146,7 @@ void generate_pack(struct Config config) {
         return;
     } else if (config.packName == NULL) {
         config.packName = config.animName;
-        printf_warning("Pack Name [-pn] was auto defaulted to the value of Animation Name [-an]\n")
+        printf_warning("Pack Name [-pn] was auto defaulted to the value of Animation Name [-an]\n");
     }
 
     int sizeRange[2] = { 0 };
