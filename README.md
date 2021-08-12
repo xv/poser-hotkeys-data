@@ -15,6 +15,7 @@ Links to the posing mods in the table below can be found on the first line of ea
 | Ilv Poser SE              |                      ILVPoser.json |
 | Kinoko Pose SE            |                    KinokoPose.json |
 | Knox Poser SE             |                     KnoxPoser.json |
+| Larmir Pose SE            |                    LarmirPose.json |
 | MK Poser SE               |                       MKPoser.json |
 | Shocky's Poses Pack SE    |                  ShockysPoses.json |
 | Wulf's Poser SE           |                     WulfPoser.json |
