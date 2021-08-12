@@ -7,6 +7,7 @@ Links to the posing mods in the table below can be found on the first line of ea
 
 | Mod Name                  | Filename                           |
 |:--------------------------|-----------------------------------:|
+| Arsenic Pose SE           |                   ArsenicPose.json |
 | BakaFactory Poser Pack SE |                       BFPoser.json |
 | Collygon's Poser SSE      |                    CollyPoser.json |
 | Flufy Fox Poser           |                     FlufyPose.json |
