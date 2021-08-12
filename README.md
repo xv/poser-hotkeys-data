@@ -9,6 +9,7 @@ Links to the posing mods in the table below can be found on the first line of ea
 |:--------------------------|-----------------------------------:|
 | BakaFactory Poser Pack SE |                       BFPoser.json |
 | Collygon's Poser SSE      |                    CollyPoser.json |
+| Flufy Fox Poser           |                     FlufyPose.json |
 | GSPoses & SLAL            |                       GSPoser.json |
 | Halo Poser SE             | HalosPoser.json<br>PinupPoser.json |
 | Ilv Poser SE              |                      ILVPoser.json |
