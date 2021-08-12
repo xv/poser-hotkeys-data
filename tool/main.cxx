@@ -33,7 +33,7 @@ struct Config
  */
 static void PrintUsageInfo()
 {
-    std::cout << "Usage:\n  pg [-an <AnimationName>] [options]\n\
+    std::cout << "Usage:\n  pg [-an <AnimationName>] [Options]\n\
   The order of specifying arguments does not matter.\n\n\
   Options:\n\
      -pn [pack name.] Sets the pack name. This is what you see in Poser Hotkeys'\n\
@@ -42,7 +42,7 @@ static void PrintUsageInfo()
                       <AnimationName> will be used.\n\n\
      -ps [pack size.] Sets the number of items (aka animations) in the pack. The\n\
      <int>            incrementation begins from 1 by default. You can specify a\n\
-                      number range by using A:Z, where A and Z represent starting\n\
+                      number range by using 0:9, where 0 and 9 represent starting\n\
                       and ending values.\n\n\
      -pp [pack pairs] Creates pairs for each item (aka animation) in the pack by\n\
      <int>            appending a lowercase alphabet letter to the end of each\n\
