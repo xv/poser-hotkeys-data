@@ -17,6 +17,7 @@ Links to the posing mods in the table below can be found on the first line of ea
 | Knox Poser SE             |                     KnoxPoser.json |
 | MK Poser SE               |                       MKPoser.json |
 | Shocky's Poses Pack SE    |                  ShockysPoses.json |
+| Wulf's Poser SE           |                     WulfPoser.json |
 
 Contributing
 ------------
