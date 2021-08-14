@@ -24,6 +24,13 @@ namespace StringUtil
     int StrToInt(std::string str, int def);
 
     /**
+     * @brief Processes a given file path and returns its containing directory.
+     * @param str The filename to process
+     * @return Path of the directory containing the given file.
+     */
+    std::string GetDirPathFromFilename(const std::string& path);
+
+    /**
      * @brief Converts a given string to lowercase. This modifies the original
      *        input.
      *

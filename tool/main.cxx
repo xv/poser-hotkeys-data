@@ -5,7 +5,10 @@
  * of the MIT license. See the LICENSE file for details.
  */
 
-#include <iomanip>
+#include <sstream>
+#include <fstream>
+#include <filesystem>
+
 #include "console.h"
 #include "strutil.h"
 
@@ -52,6 +55,81 @@ static void PrintUsageInfo()
      <int>            an UPPERCASE alphabet letter instead of lowercase.\n\n\
      -zp [zero pad..] Pads the incremental integer part of <AnimationName> with\n\
      <int>            leading zeroes.\n";
+}
+
+/**
+ * @brief Parses FNIS' FNIS_*_List.txt and verifies that files for animations
+ *        included in the file exist.
+ *
+ * @param fnisFilename Path to the FNIS_*_List.txt file.
+ */
+void VerifyAnimsExist(std::string fnisFilename)
+{
+    if (!std::filesystem::exists(fnisFilename) ||
+         std::filesystem::is_directory(fnisFilename))
+    {
+        console.Write(Console::Color::COLOR_RED, 
+            "The supplied filename in [-va] does not exist!\n");
+        return;
+    }
+
+    std::string animsDir = StringUtil::GetDirPathFromFilename(fnisFilename);
+    std::ifstream stream(fnisFilename);
+
+    if (!stream.is_open())
+    {
+        console.Write(Console::Color::COLOR_RED,
+            "Could not open file '", fnisFilename, "' for reading!\n");
+        return;
+    }
+
+    std::vector<std::string> tokens;
+    std::string line;
+    while (getline(stream, line))
+    {
+        if (line[0] != 'b' && line[0] != 'o')
+            continue;
+
+        std::stringstream sstr(line);
+        std::string token;
+        int c = 0;
+
+        sstr.ignore(2);
+
+        while (getline(sstr, token, ' '))
+        {
+            if (token[0] == '-')
+                continue;
+
+            tokens.push_back(token);
+            if (c == 1)
+                break;
+
+            c++;
+        }
+    }
+
+    stream.close();
+
+    int fileExistsCount = 0;
+    for (int i = 1; i < tokens.size(); i += 2)
+    {
+        bool exists = std::filesystem::exists(animsDir + "\\" + tokens[i]);
+        if (!exists)
+            console.Write(Console::Color::COLOR_RED, tokens[i], '\n');
+        else
+        {
+            fileExistsCount++;
+            console.Write(Console::Color::COLOR_GREEN, tokens[i], '\n');
+        }
+    }
+
+    int animFileCount = (tokens.size() / 2);
+
+    std::cout << '\n' 
+              << animFileCount << " files were verified; "
+              << fileExistsCount << " exist, " 
+              << (animFileCount - fileExistsCount) << " missing\n";
 }
 
 /**
@@ -170,7 +248,19 @@ int main(int argc, char* argv[])
     for (int i = 1; i < argc; i++)
     {
         char* value = argv[i + 1];
-        if      (PROG_HAS_ARG("-an") && value != nullptr)
+        if (PROG_HAS_ARG("-va"))
+        {
+            if (value && argv[i + 1][0] != '-') {
+                VerifyAnimsExist(value);
+                exit(EXIT_SUCCESS);
+            }
+            else
+            {
+                console.Write(Console::Color::COLOR_RED, "[-va] is missing a filename value\n");
+                exit(EXIT_FAILURE);
+            }
+        }
+        else if (PROG_HAS_ARG("-an") && value != nullptr)
             config.animName = value;
         else if (PROG_HAS_ARG("-pn") && value != nullptr)
             config.packName = value;

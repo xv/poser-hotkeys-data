@@ -24,6 +24,16 @@ int StringUtil::StrToInt(std::string str, int def)
     return ret;
 }
 
+std::string StringUtil::GetDirPathFromFilename(const std::string& path)
+{
+
+    size_t i = path.rfind('\\', path.length());
+    if (i != std::string::npos)
+        return(path.substr(0, i + 1));
+
+    return std::string();
+}
+
 void StringUtil::ToLower(std::string& str)
 {
     std::transform
