@@ -40,25 +40,29 @@ struct Config
  */
 static void PrintUsageInfo()
 {
-    std::cout << "Usage:\n  pg [-an <AnimationName>] [Options]\n\
-  The order of specifying arguments does not matter.\n\n\
+    std::cout << "Usage 01:\n  pg [-an <AnimationName>] [Options]\n\n\
+  Use to generate a single PoserData pose pack.\n\n\
   Options:\n\
-     -pn [pack name.] Sets the pack name. This is what you see in Poser Hotkeys'\n\
-     <string>         MCM when you try to select a pose pack from a specific\n\
-                      posing mod. If this argument is not specified, then\n\
-                      <AnimationName> will be used.\n\n\
-     -ps [pack size.] Sets the number of items (aka animations) in the pack. The\n\
-     <int>            incrementation begins from 1 by default. You can specify a\n\
-                      number range by using 0:9, where 0 and 9 represent starting\n\
-                      and ending values.\n\n\
-     -pp [pack pairs] Creates pairs for each item (aka animation) in the pack by\n\
-     <int>            appending a lowercase alphabet letter to the end of each\n\
-                      item. For example, specifying a pair of two for a pack\n\
-                      size of two will create [anim1a, anim1b, anim2a, anim2b].\n\n\
-     -PP [pack pairs] Performs the same function as [-pp] except that it appends\n\
-     <int>            an UPPERCASE alphabet letter instead of lowercase.\n\n\
-     -zp [zero pad..] Pads the incremental integer part of <AnimationName> with\n\
-     <int>            leading zeroes.\n";
+    -pn [pack name.] Sets the pack name. This is what you see in Poser Hotkeys'\n\
+    <string>         MCM when you try to select a pose pack from a specific\n\
+                     posing mod. If this argument is not specified, then\n\
+                     <AnimationName> will be used.\n\n\
+    -ps [pack size.] Sets the number of items (aka animations) in the pack. The\n\
+    <int>            incrementation begins from 1 by default. You can specify a\n\
+                     number range by using 0:9, where 0 and 9 represent starting\n\
+                     and ending values.\n\n\
+    -pp [pack pairs] Creates pairs for each item (aka animation) in the pack by\n\
+    <int>            appending a lowercase alphabet letter to the end of each\n\
+                     item. For example, specifying a pair of two for a pack\n\
+                     size of two will create [anim1a, anim1b, anim2a, anim2b].\n\n\
+    -PP [pack pairs] Performs the same function as [-pp] except that it appends\n\
+    <int>            an UPPERCASE alphabet letter instead of lowercase.\n\n\
+    -zp [zero pad..] Pads the incremental integer part of <AnimationName> with\n\
+    <int>            leading zeroes.\n\n";
+
+    std::cout << "Usage 02:\n  pg [-va <path\\to\\FNIS_*_List.txt>]\n\n\
+  Use to verify the existence mod animations on the disk. This is similar to\n\
+  FNIS' Consistency Check function.\n";
 }
 
 /**
