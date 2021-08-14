@@ -20,6 +20,7 @@ Links to the posing mods in the table below can be found on the first line of ea
 | MK Poser SE               |                       MKPoser.json |
 | Shocky's Poses Pack SE    |                  ShockysPoses.json |
 | Wulf's Poser SE           |                     WulfPoser.json |
+| Yuih Pose SE              |                      YuiHPose.json |
 
 Contributing
 ------------
