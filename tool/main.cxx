@@ -14,6 +14,10 @@
 
 #define PROG_HAS_ARG(arg) argv[i] && strcmp(argv[i], arg) == 0
 
+#define CONC_RED Console::Color::COLOR_RED
+#define CONC_GRN Console::Color::COLOR_GREEN
+#define CONC_YLW Console::Color::COLOR_YELLOW
+
 Console console;
 
 constexpr int ALPHABET_LETTERS = 26;
@@ -68,7 +72,7 @@ void VerifyAnimsExist(std::string fnisFilename)
     if (!std::filesystem::exists(fnisFilename) ||
          std::filesystem::is_directory(fnisFilename))
     {
-        console.Write(Console::Color::COLOR_RED, 
+        console.Write(CONC_RED, 
             "The supplied filename in [-va] does not exist!\n");
         return;
     }
@@ -78,7 +82,7 @@ void VerifyAnimsExist(std::string fnisFilename)
 
     if (!stream.is_open())
     {
-        console.Write(Console::Color::COLOR_RED,
+        console.Write(CONC_RED,
             "Could not open file '", fnisFilename, "' for reading!\n");
         return;
     }
@@ -116,11 +120,11 @@ void VerifyAnimsExist(std::string fnisFilename)
     {
         bool exists = std::filesystem::exists(animsDir + "\\" + tokens[i]);
         if (!exists)
-            console.Write(Console::Color::COLOR_RED, tokens[i], " \x1a ", tokens[i - 1], '\n');
+            console.Write(CONC_RED, tokens[i], " \x1a ", tokens[i - 1], '\n');
         else
         {
             fileExistsCount++;
-            console.Write(Console::Color::COLOR_GREEN, tokens[i], " \x1a ", tokens[i - 1], '\n');
+            console.Write(CONC_GRN, tokens[i], " \x1a ", tokens[i - 1], '\n');
         }
     }
 
@@ -144,7 +148,7 @@ void GeneratePack(Config config)
     if (config.packName.empty())
     {
         config.packName = config.animName;
-        console.Write(Console::Color::COLOR_YELLOW, 
+        console.Write(CONC_YLW, 
             "[-pn] was auto defaulted to the value of [-an]\n");
     }
 
@@ -154,7 +158,7 @@ void GeneratePack(Config config)
     {
         sizeRange[0] = 1;
         sizeRange[1] = 1;
-        console.Write(Console::Color::COLOR_YELLOW, 
+        console.Write(CONC_YLW, 
             "[-ps] was auto defaulted to 1\n");
     }
     else
@@ -167,19 +171,19 @@ void GeneratePack(Config config)
 
             if (sizeRange[0] < 0 || sizeRange[1] < 0)
             {
-                console.Write(Console::Color::COLOR_RED,
+                console.Write(CONC_RED,
                     "Invalid [-ps] range: value contains unparseable data\n");
                 exit(EXIT_FAILURE);
             }
             else if (sizeRange[0] == 0 && sizeRange[1] == 0)
             {
-                console.Write(Console::Color::COLOR_RED,
+                console.Write(CONC_RED,
                     "Invalid [-ps] range: start and end values cannot be both zeroes\n");
                 exit(EXIT_FAILURE);
             }
             else if (sizeRange[0] >= 0 && sizeRange[1] < sizeRange[0])
             {
-                console.Write(Console::Color::COLOR_RED,
+                console.Write(CONC_RED,
                     "Invalid pack [-ps] range: end value is less than start value");
                 exit(EXIT_FAILURE);
             }
@@ -189,7 +193,7 @@ void GeneratePack(Config config)
             int ps = StringUtil::StrToInt(config.packSize, -1);
             if (ps < 1)
             {
-                console.Write(Console::Color::COLOR_RED,
+                console.Write(CONC_RED,
                     "Invalid pack size: value is less than 1 or contains unparseable data\n");
                 exit(EXIT_FAILURE);
             }
@@ -201,7 +205,7 @@ void GeneratePack(Config config)
 
     if (config.packPairs > ALPHABET_LETTERS)
     {
-        console.Write(Console::Color::COLOR_YELLOW,
+        console.Write(CONC_YLW,
             "[-pp] is greater than 26 and was ignored\n");
         config.packPairs = 0;
     }
@@ -238,7 +242,7 @@ int main(int argc, char* argv[])
 
     if (argc < 2)
     {
-        console.Write(Console::Color::COLOR_RED, 
+        console.Write(CONC_RED, 
             "No argument is supplied\nExecute <pg ?> to print usage info\n");
         exit(EXIT_FAILURE);
     }
@@ -256,7 +260,7 @@ int main(int argc, char* argv[])
             }
             else
             {
-                console.Write(Console::Color::COLOR_RED, "[-va] is missing a filename value\n");
+                console.Write(CONC_RED, "[-va] is missing a filename value\n");
                 exit(EXIT_FAILURE);
             }
         }
@@ -288,7 +292,7 @@ int main(int argc, char* argv[])
 
     if (config.animName.empty())
     {
-        console.Write(Console::Color::COLOR_RED, "[-an] is not set\n");
+        console.Write(CONC_RED, "[-an] is not set\n");
         exit(EXIT_FAILURE);
     }
 
