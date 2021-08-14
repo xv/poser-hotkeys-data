@@ -116,11 +116,11 @@ void VerifyAnimsExist(std::string fnisFilename)
     {
         bool exists = std::filesystem::exists(animsDir + "\\" + tokens[i]);
         if (!exists)
-            console.Write(Console::Color::COLOR_RED, tokens[i], '\n');
+            console.Write(Console::Color::COLOR_RED, tokens[i], " \x1a ", tokens[i - 1], '\n');
         else
         {
             fileExistsCount++;
-            console.Write(Console::Color::COLOR_GREEN, tokens[i], '\n');
+            console.Write(Console::Color::COLOR_GREEN, tokens[i], " \x1a ", tokens[i - 1], '\n');
         }
     }
 
