@@ -14,13 +14,15 @@
 class Console
 {
 public:
-    struct Screen {
+    struct Screen
+    {
         HANDLE handle;
         CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
     };
 
     // https://ss64.com/nt/color.html
-    enum class Color : int {
+    enum class Color : int
+    {
         COLOR_NONE = -1,
         COLOR_BLACK = 0x0,
         COLOR_BLUE = 0x1,
@@ -63,7 +65,7 @@ public:
      * @tparam ...Args
      * @param c The color of the output.
      * @param ...args Arguments to be included in the buffer stream.
-    */
+     */
     template<typename ...Args>
     void Write(Color c, Args &&...args)
     {
