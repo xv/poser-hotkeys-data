@@ -23,6 +23,10 @@ Links to the posing mods in the table below can be found on the first line of ea
 | Wulf's Poser SE           |                     WulfPoser.json |
 | Yuih Pose SE              |                      YuiHPose.json |
 
+Installation
+------------
+Add the *.json* files to `SKSE\Plugins\PoserHotKeys\PoserData`.
+
 Contributing
 ------------
 Contributions to this repository are very much welcome and appreciated. If you have a Poser Data file that you want me to add here, or you would like to request that I create one for a specific posing mod, feel free to create a new Issues ticket and speak your mind.
