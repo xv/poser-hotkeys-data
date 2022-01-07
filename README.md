@@ -25,7 +25,7 @@ Links to the posing mods in the table below can be found on the first line of ea
 
 Installation
 ------------
-Add the *.json* files to `SKSE\Plugins\PoserHotKeys\PoserData`.
+Add the *.json* files to `SKSE\Plugins\PoserHotKeys\PoserData`. If this directory hierarchy does not exist, create it.
 
 Contributing
 ------------
