@@ -10,7 +10,7 @@ Direct links to the posing mods in the table below can be found on the first lin
 | Arsenic Pose SE           | [ArsenicPose.json](/PoserData/ArsenicPose.json)                                                | 1.0.0 (Jan 19 2018)
 | BakaFactory Poser Pack SE | [BFPoser.json](/PoserData/BFPoser.json)                                                        | 1.0.0 (Jul 31 2018)
 | Collygon's Poser SSE      | [CollyPoser.json](/PoserData/CollyPoser.json)                                                  | 5.0.0 (Feb 21 2021)
-| GSPoses & SLAL            | [GSPoser.json](/PoserData/GSPoser.json)                                                        | N/A (Feb 06 2022)
+| GSPoses & SLAL            | [GSPoser.json](/PoserData/GSPoser.json)                                                        | N/A (Sep 20 2022)
 | Halo Poser SE             | [HalosPoser.json](/PoserData/HalosPoser.json)<br>[PinupPoser.json](/PoserData/PinupPoser.json) | 1.8.0 (Mar 24 2020)
 | Ilv Poser SE              | [ILVPoser.json](/PoserData/ILVPoser.json)                                                      | 0.2.4 (Apr 08 2022)
 | Kinoko Pose SE            | [KinokoPose.json](/PoserData/KinokoPose.json)                                                  | 1.0.0 (Jul 18 2018)
