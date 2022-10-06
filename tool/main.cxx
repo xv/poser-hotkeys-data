@@ -12,7 +12,7 @@
 #include "console.h"
 #include "strutil.h"
 
-#define PROG_HAS_ARG(arg) argv[i] && strcmp(argv[i], arg) == 0
+#define PROG_HAS_ARG(argv, arg) argv[i] && strcmp(argv[i], arg) == 0
 
 #define CONC_RED Console::Color::COLOR_RED
 #define CONC_GRN Console::Color::COLOR_GREEN
@@ -260,7 +260,7 @@ int main(int argc, char* argv[])
     for (int i = 1; i < argc; i++)
     {
         char* value = argv[i + 1];
-        if (PROG_HAS_ARG("-va"))
+        if (PROG_HAS_ARG(argv, "-va"))
         {
             if (value && argv[i + 1][0] != '-') {
                 VerifyAnimsExist(value);
@@ -272,23 +272,23 @@ int main(int argc, char* argv[])
                 exit(EXIT_FAILURE);
             }
         }
-        else if (PROG_HAS_ARG("-an") && value != nullptr)
+        else if (PROG_HAS_ARG(argv, "-an") && value != nullptr)
             config.animName = value;
-        else if (PROG_HAS_ARG("-pn") && value != nullptr)
+        else if (PROG_HAS_ARG(argv, "-pn") && value != nullptr)
             config.packName = value;
-        else if (PROG_HAS_ARG("-ps") && value != nullptr)
+        else if (PROG_HAS_ARG(argv, "-ps") && value != nullptr)
             config.packSize = value;
-        else if (PROG_HAS_ARG("-pp") && value != nullptr)
+        else if (PROG_HAS_ARG(argv, "-pp") && value != nullptr)
             config.packPairs = StringUtil::StrToInt(value, 0);
-        else if (PROG_HAS_ARG("-PP") && value != nullptr)
+        else if (PROG_HAS_ARG(argv, "-PP") && value != nullptr)
         {
             config.packPairs = StringUtil::StrToInt(value, 0);
             for (int i = 0; i < ALPHABET_LETTERS; i++)
                 alphabet[i] ^= 32;
         }
-        else if (PROG_HAS_ARG("-zp") && value != nullptr)
+        else if (PROG_HAS_ARG(argv, "-zp") && value != nullptr)
             config.zeroPad = StringUtil::StrToInt(value, 1);
-        else if (PROG_HAS_ARG("?")) {
+        else if (PROG_HAS_ARG(argv, "?")) {
             // Ignore the argument if it is not the only one
             if (argc > 2)
                 continue;
