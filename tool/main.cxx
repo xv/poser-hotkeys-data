@@ -217,27 +217,31 @@ void GeneratePack(Config config)
     StringUtil::ToLower(config.packName);
     std::cout << "\"" << config.packName << "\" : [ ";
 
+    std::string delim = "";
     for (int i = sizeRange[0]; i <= sizeRange[1]; i++)
     {
         if (config.packPairs < 2)
         {
-            std::cout << "\"" << config.animName 
+            std::cout << delim << "\"" << config.animName 
                       << std::setw(config.zeroPad) << std::setfill('0') << i 
-                      << "\", ";
+                      << "\"";
 
+            delim = ", ";
             continue;
         }
     
         for (int j = 0; j < config.packPairs; j++)
         {
-            std::cout << "\"" << config.animName 
+            std::cout << delim << "\"" << config.animName
                       << std::setw(config.zeroPad) << std::setfill('0') << i
                       << alphabet[j]
-                      << "\", ";
+                      << "\"";
+
+            delim = ", ";
         }
     }
 
-    std::cout << "\b\b ]\n";
+    std::cout << " ]";
 }
 
 int main(int argc, char* argv[])
